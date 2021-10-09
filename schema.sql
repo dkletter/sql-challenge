@@ -1,5 +1,6 @@
 --
 -- Creating tables, inserting the data from CSV, then testing each table.
+-- Be sure to create tables in the correct order to handle foreign keys.
 --
 CREATE TABLE titles (
 	title_id CHAR(5) NOT NULL, 
