@@ -39,6 +39,7 @@ CREATE TABLE employees (
 
 --
 -- The employees CSV is way too long to write an INSERT so I used pgAdmin instead.
+-- We didn't cover COPY in class but that's another method to import data from CSV.
 --
 SELECT * FROM employees;
 
@@ -65,7 +66,8 @@ CREATE TABLE dept_manager (
 	dept_no CHAR(4), 
 	emp_no INT, 
 	FOREIGN KEY (dept_no) REFERENCES departments(dept_no), 
-	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
+	PRIMARY KEY (dept_no, emp_no)
 );
 
 INSERT INTO dept_manager(dept_no,  emp_no) VALUES
@@ -100,7 +102,8 @@ CREATE TABLE dept_emp (
 	emp_no INT, 
 	dept_no CHAR(4), 
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no), 
-	FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
+	FOREIGN KEY (dept_no) REFERENCES departments(dept_no),
+	PRIMARY KEY (emp_no, dept_no)
 );
 
 --
@@ -111,7 +114,8 @@ SELECT * FROM dept_emp;
 CREATE TABLE salaries (
 	emp_no INT, 
 	salary DEC, 
-	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
+	PRIMARY KEY (emp_no)
 );
 
 --
