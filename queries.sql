@@ -5,8 +5,7 @@
 -- List the following details of each employee: employee number, last name, first name, sex, and salary.
 SELECT employees.emp_no, employees.first_name, employees.last_name, employees.sex, salaries.salary
 FROM employees
-INNER JOIN salaries ON 
-salaries.emp_no = employees.emp_no;
+INNER JOIN salaries ON salaries.emp_no = employees.emp_no;
 
 -- List first name, last name, and hire date for employees who were hired in 1986.
 SELECT first_name, last_name, hire_date 
@@ -26,6 +25,7 @@ INNER JOIN employees ON employees.emp_no = dept_emp.emp_no
 INNER JOIN departments ON departments.dept_no = dept_emp.dept_no;
 
 -- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
+-- Note, the LIKE opertor is case insensitive. Unless this is a trick question, I could have used 'b%' and it would have worked too.
 SELECT employees.first_name, employees.last_name, employees.sex
 FROM employees
 WHERE first_name = 'Hercules' AND last_name LIKE 'B%';
@@ -42,7 +42,7 @@ SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.d
 FROM dept_emp
 INNER JOIN employees ON employees.emp_no = dept_emp.emp_no
 INNER JOIN departments ON departments.dept_no = dept_emp.dept_no
-WHERE departments.dept_name = 'Sales' OR departments.dept_name = 'Development';
+WHERE departments.dept_name IN ('Sales', 'Development');
 
 -- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 SELECT employees.last_name, COUNT(employees.last_name) AS "frequency"
